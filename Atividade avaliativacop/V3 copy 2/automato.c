@@ -6,24 +6,23 @@
 double ran1(long int *idum);
 #define RAN() ((double)rand()/(double)(RAND_MAX))
 #define PI M_PI
-#define N 10
+#define N 300
 
 int main(int argc, char const *argv[])
 {
     FILE*fil;
     fil = fopen("tabela.dat","w");
     float a[N][N], na[N][N];
-    double p; 
+    float p; 
     int z, i,j,k,l;
     int infec,t,total;
 
     total = 0;
-    p = 0.40;
+    p = 0.2;
     infec = 0;
     t = 0;
     a[N/2][N/2] = 1;
     na[N/2][N/2] = 1;
-
 
 
     while (total <= (N*N))
@@ -34,7 +33,7 @@ int main(int argc, char const *argv[])
         for (l = 0; l <= N; l++)
         {
             z = na[k][l];
-
+            
             if (z == 1)
             { 
                 infec = 0;
@@ -44,22 +43,27 @@ int main(int argc, char const *argv[])
                     {
                             a[k+i][l+j] = RAN();
 
-                            if (a[k+i][l+j] < p)
+                            if (a[k+i][l+j] <= p)
                         {
                             a[k+i][l+j] = 1;
                             na[k+i][l+j] = a[k+i][l+j];
                             infec++;
+                            total += infec;
+                            if (total >= (N*N))
+                            {
+                                break;
+                            }
                         }
                     }
                     
                 }
-                total =+ infec;
-                fprintf(fil,"%10.d   %10.d\n",t,total);
+               
                 z = 0;
+                
             }
         }
     }
-
+    fprintf(fil, "%10d  %10d\n", t, total);
     }
     
 return 0;

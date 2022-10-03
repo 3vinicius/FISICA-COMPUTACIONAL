@@ -26,14 +26,14 @@ int main(int argc, char const *argv[])
 
 
 
-    while (total <= (N*N))
+    while (total <= (90000))
     {   
         
         for (k = 0; k <= 300; k++)
     {
         for (l = 0; l<=300 ;l++)
         {
-        if (na[k][l] = 1)
+        if (na[k][l] == 1)
         {
         infec = 0;
         for (i = -1; i <= 1; i++)
@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
             
         }
         t++;
-        fprintf(fil,"%10.d   %10.d\n",t,total++);
+        fprintf(fil,"%10.d   %10.d\n",t,total);
         }
         }
     }
