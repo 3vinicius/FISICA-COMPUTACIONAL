@@ -26,9 +26,9 @@ int main(int argc, char const *argv[])
 
 
 
-    while (total != (N*N))
+    while (total <= (N*N))
     {   
-        t++;
+        
         for (k = 0; k <= 300; k++)
     {
         for (l = 0; l<=300 ;l++)
@@ -40,11 +40,6 @@ int main(int argc, char const *argv[])
         {
             for (j = -1; j <= 1; j++)
             {
-                if (i = j = 0)
-                {
-                    
-                }else{
-                
                 a[k+i][l+j] = RAN();
 
                 if (a[k+i][l+j] < p)
@@ -55,10 +50,10 @@ int main(int argc, char const *argv[])
                 total++;
             }
             }
-            }
+            
         }
-    
-        fprintf(fil,"%10.d   %10.d\n",t,total);
+        t++;
+        fprintf(fil,"%10.d   %10.d\n",t,total++);
         }
         }
     }
