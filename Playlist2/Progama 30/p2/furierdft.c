@@ -9,13 +9,15 @@ int main(int argc, char const *argv[])
 {
     FILE *fil1,*fil2;
     fil1 = fopen("saida.dat","w");
-    fil2 = fopen("niveisk4v2.dat","r");
-
+   
 
     double r1,r2,r3,r4,f,df;
     double _Complex cc1,cc2,cc3,ic;
     double x[300000],y[300000];
     int i,j,N,i10,i20;
+    char filname[100] = "niveisk4v2.dat";
+
+    fil2 = fopen(filname,"r");
 
     ic= 0.+I;
 

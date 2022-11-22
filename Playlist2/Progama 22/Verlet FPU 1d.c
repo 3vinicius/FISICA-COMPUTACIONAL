@@ -22,6 +22,7 @@ int main(int argc, char const *argv[])
     double kk,m1,mf,kk3,t,tm,dt,v1,v2;
     double xx0[2000],xx1[2000],vx0[2000],vx1[2000];
     double ax0[2000],ax1[2000],energ[2000];
+
     m1 =1.;
     c10 = 0.;
     c500 = 0.;
@@ -53,9 +54,9 @@ int main(int argc, char const *argv[])
         v1=fabs(xx0[i]-xx0[i-1]);
         v2=fabs(xx0[i]-xx0[i+1]);
         r1 = v1-1.;
-        r2 = v2 -1.;
+        r2 = v2-1.;
         r3 = 0.25*kk*(r1*r1+r2*r2);
-        r4 = (1./6.)*kk3*(r1*r1+r2*r2*r2);
+        r4 = (1./6.)*kk3*(r1*r1*r1+r2*r2*r2);
         U0=U0+r3+r4+0.5*vx0[i]*vx0[i];
 
     }
@@ -86,7 +87,7 @@ int main(int argc, char const *argv[])
 
         }
         
-        for ( i = 1; i <= n0; i++)
+        /* for ( i = 1; i <= n0; i++)
         {
             v1 = fabs(xx1[i]-xx1[i-1]);
             v2 = fabs(xx1[i]-xx1[i+1]);
@@ -95,9 +96,9 @@ int main(int argc, char const *argv[])
             ax1[i]=-kk*r1-kk3*(r1*r1)+kk*r2+kk3*(r2*r2);
             vx1[i]=vx0[i]+0.5*dt*(ax0[i]+ax1[i]);
 
-        }
+        } */
         
-        for ( i = 0; i <= n0; i++)
+        for ( i = 1; i <= n0; i++)
         {
             vx0[i]=xx1[i];
             vx0[i]=vx1[i];
@@ -113,6 +114,7 @@ int main(int argc, char const *argv[])
             for (i = 1; i <= n0; i++)
             {
                 v1=fabs(xx0[i]-xx0[i-1]);
+                v2=fabs(xx0[i]-xx0[i+1]);
                 r1=v1-1.;
                 r2=v2-1.;
                 r3=0.25*kk*(r1*r1+r2*r2);
@@ -121,19 +123,23 @@ int main(int argc, char const *argv[])
                 energ[i]=(r3+r4+0.5*vx0[i]*vx0[i])/U0;
                 fprintf(fil1,"%20.8g %20.8g %20.8g\n",t,(double)i,energ[i]);
             }
-            fprintf(fil1,"%20.8g  %20.8g\n",t,fabs(1.-UT/U0));
+            fprintf(fil2,"%20.8g  %20.8g\n",t,fabs(1.-UT/U0));
             rr3=0.;
 
-
+            c300++;
+            if (t>1)c1200=11;
+            if(c300>c1200){
+           
 
             c300=0.;
             c500++;
 
             for (i = 1; i <= n0; i++)
             {
-                fprintf(fil2,"%20.8g  %20.8g %20.8g\n",t,(double)i,energ[i]);
+                fprintf(fil3,"%20.8g  %20.8g %20.8g\n",t,(double)i,energ[i]);
             }
-            fclose(fil2);
+            fclose(fil3);
+            }
         }
     }
     
