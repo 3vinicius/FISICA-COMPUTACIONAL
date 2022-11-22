@@ -13,7 +13,7 @@
 int main()
 {
     FILE *fil1;
-    fil1 = fopen("Nnivelsk4v3.dat","w");
+    fil1 = fopen("Nnivelsk4v2.dat","w");
 
 
 
@@ -46,7 +46,7 @@ int main()
     {
         for (i = 1; i <= N; i++)
         {
-            k1[i]=dt*ic*(en[i]+tt*(cn[i+1]+cn[i-1]));
+            k1[i]=dt*ic*(en[i]*cn[i]+tt*(cn[i+1]+cn[i-1]));
         }
         
         for (i = 1; i <= N; i++)
@@ -70,7 +70,7 @@ int main()
             cc1=cn[i]+k3[i];
             cc2=cn[i+1]+k3[i+1];
             cc3=cn[i-1]+k3[i-1];
-            k4[i]=dt*ic*(en[i]*cc1+tt*(cc2*cc3));
+            k4[i]=dt*ic*(en[i]*cc1+tt*(cc2+cc3));
         }
         
         r1 = 0.;
@@ -85,7 +85,7 @@ int main()
 
 
 
-        nm=n2m=m2=0.;
+      nm=n2m=m2=0.;
         for ( i = 1; i <= N; i++)
         {
             nm+=((double)i)*(pow(cabs(cn[i]),2.));
@@ -93,11 +93,11 @@ int main()
             n2m+=((double)i)*((double)i)*(pow(cabs(cn[i]),2.));
         }
          
-        m2 = n2m-nm*nm;
+        m2 = n2m-nm*nm; 
 
 
 
-        fprintf(fil1,"%20.8g %20.8g %20.8g\n",t,m2,fabs(1.-r1));
+        fprintf(fil1,"%20.8g  %20.8g  %20.8g\n",t, m2, fabs(1.-r1));
 
 
     }
