@@ -9,99 +9,121 @@
 
 int main(int argc, char const *argv[])
 {
-    int N;
-    int NP=2005;
-    double A[NP][NP],r1,r2,r3,r20,alf;
-    double x[NP],y[NP],z[NP],erro1;
-    int i,j,k,c10,c20;
+    int k,i,j,N;
+    double r1,r2,r3,r4,r5,r6;
+    double AA[10][10],BB[10][10],GG[10];
+    double MM[10][10],DD[10],CC[10][10];
 
-    alf=1.55;
+    N=2;
 
-    N=2000;
 
-    for (i = 1; i <=N; i++){
-    for (j = (i+1); i <= N; j++){
-        r1 = abs((float)i-(float)j);
-        r1=exp(-alf*log(r1));
 
-        A[i][j]=r1;
-        A[j][i]=r1;
-    }
-    }
-    
 
     for (i = 1; i <= N; i++)
     {
-        A[i][i]=(3.*RAN()-1.5);
+    for ( j = 1; j <= N; j++)
+    {
+        AA[i][j]=1.;
+        BB[i][j]=1.;
+
+    } }
+    
+    for ( i = 1; i <= N; i++)
+    {
+        for (j = 1; j <= N; j++)
+        {
+
+        MM[i][j]=AA[i][j]+BB[i][j];
+        }
+    }
+    
+    for (i = 1; i <= N; i++)
+    {
+        //printf("%20.8g  %20.8g\n", MM[i][1],MM[i][2]);
+    }
+    
+    for ( i = 1; i <= N; i++)
+    {for (j = 1; j <= N; j++){
+        AA[i][j]=1.;
+        BB[i][j]=1.;
+
+    }}
+    
+
+    for ( i = 1; i <= N; i++)
+    {for (j = 1; j <= N; j++){
+
+        CC[i][j]=0.;
+        for ( k = 0; k <= N; k++)
+        {
+            CC[i][j]=CC[i][j]+AA[i][k]*BB[k][j];
+        }
+        
+
+
+    }}
+    
+    for ( i = 1; i <= N; i++)
+    {
+        //printf("%20.8g  %20.8g\n", CC[i][1],CC[i][2]);
     }
     
 
-    for (i = 1; i <=N; i++)
-    {
-        x[i]=1./sqrt((float)N);
-    }
-    
+    GG[1]=1;
+    GG[2]=0.;
 
-    r20=1000.;
-    i=-1;
-    c10=0.;
-    c20=10.;
 
-    while (i<0)
+    for ( i = 1; i <= N; i++)
     {
-        r1=0.;
-    for (j = 1; j<=N; j++){
-        y[j]=0.;
-    for (k = 1; k<=N; k++){
-        y[j]=y[j]+A[j][k]*x[k];
-    }
-    r1=r1+y[j]*y[j];
-    }
-    
-    r1=sqrt(r1);
-    for (j=1; j <= N; j++)
-    {
-        x[j]=y[j]/r1;
-    }
-    
-    r2 = 0.;
-    r3 = 0.;
-    for (j = 1; j <= N; j++)
-    {
-        z[j]=0.;
-    for (k = 1; k <= N; k++)
-    {
-        z[j]=z[j]+A[j][k]*x[k];
-    }
-    
-    r2=r2+x[j]*z[j];
-    }
-    
-
-    erro1=abs(r2>r20);
-    c10=c10+1;
-    if (c10>c20)
-    {
-        printf("%20.8f   %20.8f\n",r2,erro1);
-        c20=c20+10;
+        DD[i]=0.;
+        for ( k = 1; k <= N; k++)
+        {
+            DD[i]=DD[i]+AA[i][k]*GG[k];
+        }
         
     }
     
-        if (erro1<0.0001)
-        {
-            i=1;
-            r20=r2;
-        }
+    for (i = 1; i <= N; i++)
+    {
+        //printf("%20.8g\n", DD[i]);
+    }
 
 
+    r1=0.;
+    for ( i = 1; i <= N; i++)
+    {
+        r1=r1+AA[i][i];
+    }
+    //printf("%20.8g\n",r1);
+
+
+
+    for ( i = 1; i <= N; i++)
+    {for (j = 1; j <= N; j++){
+
+
+        AA[i][j]=1.;
 
     }
-    
+    }
 
-
-
-
-
+    for ( j = 0; j <= N; j++)
+    {
+        r1=0.;
+        for ( i = 1; i <=N; i++)
+        {
+            r1=r1+pow(AA[i][j],2.);
+        }
+        r1=sqrt(r1);
+        for ( i = 1; i <= N; i++)
+        {
+            AA[i][j]=AA[i][j]/r1;
+        }
+    }
+    for ( i = 1; i <= N; i++)
+    {
+        printf("%20.8g  %20.8g\n",AA[i][1],AA[i][2]);
+    }
 
     return 0;
 }

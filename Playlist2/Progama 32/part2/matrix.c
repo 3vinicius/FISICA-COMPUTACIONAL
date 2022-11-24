@@ -11,13 +11,12 @@
 int main(int argc, char const *argv[])
 {
     FILE *fil;
-    fil = fopen("soucaomatricial.dat","w");
+    fil = fopen("socaomatricial.dat","w");
 
 
-    int k,i,j,n0;
-    double r1,r2,r3,r4;
+    int k,i,j;
     double MM[10][10],b[10],erro[10];
-    double x1[10],x2[10],b1[10],x0[10];
+    double x1[10],x2[10],b1[10];
     double AA[10][10],DD[10][10],IDD[10][10];
 
     AA[1][1]=2;
@@ -116,7 +115,7 @@ int main(int argc, char const *argv[])
     
 
 
-    erro[1]=fabs(b1[1]-b[1]);
+        erro[1]=fabs(b1[1]-b[1]);
         erro[2]=fabs(b1[2]-b[2]);
         erro[3]=fabs(b1[3]-b[3]);
 

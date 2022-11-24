@@ -1,10 +1,7 @@
-#include <time.h>
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include <complex.h>
-
-#define RAN()  ((double)rand()/(double)(RAND_MAX))
 
 
 
@@ -14,7 +11,6 @@ int main(int argc, char const *argv[])
 {
     FILE *fil;
 
-    fil = fopen("dados.dat","w");
 
 
     double f1,f2,x1,x2,x3;
@@ -46,10 +42,10 @@ int main(int argc, char const *argv[])
         FF[1]=2.*pow(x1,3.)-y1*y1-1.;
         FF[2]=x1*(pow(y1,3.))-y1-4.;
         FF1[1]=-FF[1];
-        FF[2]=-FF[2];
+        FF1[2]=-FF[2];
 
         vv[1] = 0.;
-        vv[2] =0.;
+        vv[2] = 0.;
 
         for (i = 1; i <=2; i++)
         {
