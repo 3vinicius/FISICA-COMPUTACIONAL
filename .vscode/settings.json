@@ -6,5 +6,6 @@
         "complex.h": "c",
         "time.h": "c",
         "algorithm": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

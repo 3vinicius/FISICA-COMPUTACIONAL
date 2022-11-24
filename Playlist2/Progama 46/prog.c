@@ -6,17 +6,19 @@
 
 int main(int argc, char const *argv[])
 {
-    printf("oi");
+   
     
     FILE *fil;
     fil = fopen("novo.dat","w");
+ printf("oi");
 
     double epsi[500];
     double r1,r2,t,dt,tm,U,del;
-    double _Complex cn[500][500],A1[500][500];
-    double _Complex A0[500][500],ic,cconst[30];
+    double cn[500][500],A1[500][500];
+    double A0[500][500],ic,cconst[30];
     double _Complex cc1,cc2,cc3;
     int i,j,N,n0,l,i10;
+
 
 
 
@@ -31,11 +33,11 @@ int main(int argc, char const *argv[])
 
     for (l = 2; l <= n0; l+=1)
     {
-        cconst[l]=ic*cconst[l-1];
+        cconst[l]=ic*dt*cconst[l-1];
     }
     
     r1 =1;
-    for (l = 2; l < n0; l+=1)
+    for (l = 2; l <= n0; l+=1)
     {
         r1=r1*(float)l;
         cconst[l]=cconst[l]/r1;
@@ -68,15 +70,16 @@ int main(int argc, char const *argv[])
     {
     for ( j = 1; j <= N; j++)
     {
-        cc1=-(A0[i-1][j])+A0[i+1][j]+A0[i][j-1];
+        cc1=-(A0[i-1][j])+A0[i+1][j]+A0[i][j+1]+A0[i][j-1];
         del=0.;
-        if (i=j)
+        if (i==j)
         {
         del =1.;}
         r1 = U*del+epsi[i]+epsi[j];
         cc2=(r1)*A0[i][j];
         A1[i][j]=cc1+cc2;
         }
+
         
     }
 
@@ -107,20 +110,20 @@ int main(int argc, char const *argv[])
     {
     for ( j = 1; j <= N; j++)
     {
-    r2=abs(cn[i][j]);
+    r2=fabs(cn[i][j]);
     r1=r1+(r2*r2);
     }
     }
     
-    fprintf(fil,"%10.8g  %d",t,abs(1-r1));
+    fprintf(fil,"%10.8g  %10.8g\n",t,fabs(1-r1));
     i10=0.;
 
 
     }
     
     }
-    
-    
+     
+   
     
 
 
